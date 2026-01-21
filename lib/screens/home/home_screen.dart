@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../checkout/checkout_screen.dart';
 
+// Stateful because: Fuel type and gallons change, price recalculates
+// Flutter creates _HomeScreenState and calls build()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -9,9 +12,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // -----------------------------
-  // STATE (data that can change)
+  // STATE
   // -----------------------------
 
+  // App logic, business rules, not UI (derived from this data)
   String selectedFuelType = 'Regular';
   double gallons = 10;
 
@@ -42,7 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Fuel Type
             const Text(
               'Fuel Type',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -50,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 8),
 
+            // Changes fuel type
             DropdownButton<String>(
               value: selectedFuelType,
               isExpanded: true,
@@ -65,12 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 24),
 
-            // Gallons
             const Text(
               'Gallons',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-
+            // Changes # of gallons
             Slider(
               value: gallons,
               min: 1,
@@ -91,7 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const Spacer(),
 
-            // Price + Continue
             Text(
               'Estimated Total: \$${totalPrice.toStringAsFixed(2)}',
               style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -103,9 +105,16 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Later: navigate to checkout
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Order submitted (mock)')),
+                  // Keeps HomeScreen alive, pushes CheckoutScreen on top
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CheckoutScreen(
+                        fuelType: selectedFuelType,
+                        gallons: gallons,
+                        totalPrice: totalPrice,
+                      ),
+                    ),
                   );
                 },
                 child: const Text('Continue'),

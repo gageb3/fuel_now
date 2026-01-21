@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../home/home_screen.dart'; // Updated import path for HomeScreen
+import '../home/home_screen.dart';
+import '../auth/signup_screen.dart';
 
+// Stateful since email and password changes, button presses matter
+// Creates LoginScreen, calls createState, instantiates _LoginScreenState
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -8,10 +11,12 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
+// Lives as long as screen is visible, holds mutable data, controls when UI rebuilds.
 class _LoginScreenState extends State<LoginScreen> {
-  // State variables to hold user input
   String email = '';
   String password = '';
+
+  // Describe UI using widgets, flutter reads current state, UI reflects state
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +26,17 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            // Prevent Column from stretching vertically
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Title
               const Text(
                 'Login',
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 24),
-
-              // Email field
+              // When you type, onChanged fires, setState() updates data, flutter schedules a rebuild.
               TextField(
                 onChanged: (value) {
                   setState(() {
@@ -49,14 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 16),
 
-              // Password field
               TextField(
+                obscureText: true,
                 onChanged: (value) {
                   setState(() {
                     password = value;
                   });
                 },
-                obscureText: true,
                 decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
@@ -65,32 +66,29 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 24),
 
-              // Login button
-              ElevatedButton(
-                onPressed: () {
-                  if (email.isEmpty || password.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Please enter email and password'),
-                      ),
-                    );
-                  } else {
-                    // Navigate to HomeScreen
-                    Navigator.push(
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Removes LoginScreen from stack, pushes HomeScreen, prevents back navigation
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomeScreen(),
                       ),
                     );
-                  }
-                },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 12.0,
-                  ),
-                  child: Text('Login', style: TextStyle(fontSize: 18)),
+                  },
+                  child: const Text('Login'),
                 ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SignUpScreen()),
+                  );
+                },
+                child: const Text('Sign Up'),
               ),
             ],
           ),
