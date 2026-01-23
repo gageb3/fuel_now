@@ -4,6 +4,8 @@ class AppData {
 
   AppData._internal();
 
+  String email = 'user@example.com';
+  String password = '';
   // Address Info
   String street = '';
   String city = '';

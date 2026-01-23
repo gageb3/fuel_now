@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '/data/app_data.dart';
 
 // Stateless because it doesn't change data, only displays data passed into it
 // Once built, nothing here needs to update
@@ -49,6 +50,34 @@ class CheckoutScreen extends StatelessWidget {
             _summaryRow('Fuel Type', fuelType),
             _summaryRow('Gallons', gallons.toStringAsFixed(0)),
             _summaryRow('Total Price', '\$${totalPrice.toStringAsFixed(2)}'),
+
+            const SizedBox(height: 16),
+            Builder(
+              builder: (context) {
+                final address = AppData.instance;
+                if (address.hasAddress) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Delivery Address:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '${address.street}, ${address.city}, ${address.state} ${address.zip}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
 
             const Spacer(),
 
