@@ -14,6 +14,13 @@ class FuelNowApp extends StatelessWidget {
     return MaterialApp(
       title: 'FuelNow',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: const Color(0xFF121212),
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.deepOrange,
+          secondary: Colors.orangeAccent,
+        ),
+      ),
       home: const LoginScreen(),
     );
   }

@@ -92,6 +92,7 @@ class CheckoutScreen extends StatelessWidget {
   // HELPER WIDGET
   // -----------------------------
 
+  // Private helper widget, reduces repetition, improves readability, easier to update later.
   Widget _summaryRow(String label, String value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
