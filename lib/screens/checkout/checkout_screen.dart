@@ -88,7 +88,7 @@ class CheckoutScreen extends StatelessWidget {
                   // Pushes a modal route, show confirmation UI
                   showDialog(
                     context: context,
-                    builder: (context) {
+                    builder: (dialogContext) {
                       // Simulates successful API response, user feedback etc
                       return AlertDialog(
                         title: const Text('Order Confirmed'),
@@ -98,6 +98,16 @@ class CheckoutScreen extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () {
+                              if (fuelType == 'Basic' ||
+                                  fuelType == 'Standard' ||
+                                  fuelType == 'Premium') {
+                                AppData.instance.currentPlan = fuelType;
+                              }
+                              ScaffoldMessenger.of(dialogContext).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Order successful!'),
+                                ),
+                              );
                               Navigator.pop(context); // close dialog
                               Navigator.pop(context); // go back to home
                             },

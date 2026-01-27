@@ -11,6 +11,7 @@ class AppData {
   String city = '';
   String state = '';
   String zip = '';
+  String currentPlan = 'None';
 
   // Helper: check if address exists
   bool get hasAddress {

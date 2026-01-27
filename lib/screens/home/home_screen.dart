@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           planName: 'Basic Plan',
                           price: 19.99,
                           description:
-                              'Includes 1 fuel delivery per month with standard support.',
+                              'Includes 1 fuel delivery per week with standard support.',
                         ),
                       ),
                     );
@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           planName: 'Standard Plan',
                           price: 39.99,
                           description:
-                              'Up to 3 deliveries per month with priority scheduling.',
+                              'Up to 3 deliveries per week with priority scheduling.',
                         ),
                       ),
                     );
@@ -191,6 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   child: const Text('Premium Plan'),
                 ),
+
+                const SizedBox(height: 24),
 
                 // --- Estimated Total ---
                 Text(
