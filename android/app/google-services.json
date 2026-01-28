@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "134950611453",
+    "project_id": "mock-fuel-delivery-app",
+    "storage_bucket": "mock-fuel-delivery-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134950611453:android:8f3c6be48bf434d6261194",
+        "android_client_info": {
+          "package_name": "com.example.fuel_now"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB89t7szJDNZfd9c2wgWRtNvOM7tWsQU2o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
